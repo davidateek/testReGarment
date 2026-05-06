@@ -1,9 +1,28 @@
+/**
+ * Clothes Recycle & Donation Directory
+ * Main application script
+ * 
+ * Features:
+ * - Load and display recycling centers and donation drop-offs
+ * - Interactive map with location markers
+ * - Search and filter functionality
+ * - Location detail modals
+ * - Responsive design
+ */
+
+// Global variables
 let allLocations = [];
 let filteredLocations = [];
 let map;
 let markers = [];
 
-// Initialize the application
+/**
+ * Initialize the application on page load
+ * - Load location data from JSON
+ * - Set up the map
+ * - Render initial list and markers
+ * - Attach event listeners
+ */
 document.addEventListener('DOMContentLoaded', async () => {
     await loadLocations();
     initializeMap();
@@ -11,7 +30,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     setupEventListeners();
 });
 
-// Load location data from JSON file
+/**
+ * Load location data from locations.json file
+ * Handles async fetch and error management
+ */
 async function loadLocations() {
     try {
         const response = await fetch('locations.json');
@@ -23,9 +45,12 @@ async function loadLocations() {
     }
 }
 
-// Initialize Leaflet map
+/**
+ * Initialize Leaflet map with OpenStreetMap tiles
+ * Sets view to center of USA and adds tile layer
+ */
 function initializeMap() {
-    map = L.map('map').setView([39.5, -98.5], 4); // Center on USA
+    map = L.map('map').setView([39.5, -98.5], 4);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors',
@@ -35,7 +60,12 @@ function initializeMap() {
     addMarkersToMap(allLocations);
 }
 
-// Add location markers to map
+/**
+ * Add or update location markers on the map
+ * Green markers for recycle centers, blue for donation drop-offs
+ * 
+ * @param {Array} locations - Array of location objects to display
+ */
 function addMarkersToMap(locations) {
     markers.forEach(marker => map.removeLayer(marker));
     markers = [];
@@ -68,7 +98,12 @@ function addMarkersToMap(locations) {
     });
 }
 
-// Render locations list
+/**
+ * Render locations list view
+ * Creates and displays location cards in the sidebar
+ * 
+ * @param {Array} locations - Array of location objects to display
+ */
 function renderLocations(locations) {
     const container = document.getElementById('locationsList');
     container.innerHTML = '';
@@ -86,7 +121,13 @@ function renderLocations(locations) {
     addMarkersToMap(locations);
 }
 
-// Create a location card element
+/**
+ * Create a location card DOM element
+ * Displays location summary with name, type, address, and phone
+ * 
+ * @param {Object} location - Location object with all properties
+ * @returns {HTMLElement} - Location card element
+ */
 function createLocationCard(location) {
     const card = document.createElement('div');
     card.className = 'location-card';
@@ -105,7 +146,12 @@ function createLocationCard(location) {
     return card;
 }
 
-// Show location details in modal
+/**
+ * Display detailed location information in a modal
+ * Shows complete address, phone, hours, website, and coordinates
+ * 
+ * @param {Object} location - Location object with all properties
+ */
 function showLocationDetails(location) {
     const modal = document.getElementById('detailsModal');
     const modalBody = document.getElementById('modalBody');
@@ -149,7 +195,13 @@ function showLocationDetails(location) {
     modal.style.display = 'block';
 }
 
-// Setup event listeners for search and filters
+/**
+ * Setup event listeners for UI interactions
+ * - Search input for filtering
+ * - Type filter checkboxes
+ * - Clear filters button
+ * - Modal close functionality
+ */
 function setupEventListeners() {
     const searchInput = document.getElementById('searchInput');
     const filterRecycle = document.getElementById('filterRecycle');
@@ -171,7 +223,11 @@ function setupEventListeners() {
     });
 }
 
-// Apply search and filter logic
+/**
+ * Apply search and filter logic
+ * Filters locations by search term and selected types
+ * Updates both list and map display
+ */
 function applyFilters() {
     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
     const filterRecycle = document.getElementById('filterRecycle').checked;
@@ -194,7 +250,10 @@ function applyFilters() {
     renderLocations(filteredLocations);
 }
 
-// Clear all filters
+/**
+ * Clear all search and filter inputs
+ * Resets to showing all locations
+ */
 function clearAllFilters() {
     document.getElementById('searchInput').value = '';
     document.getElementById('filterRecycle').checked = true;
