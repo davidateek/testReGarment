@@ -12,7 +12,7 @@ body {
 }
 
 header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #0066cc 0%, #004d99 100%);
     color: white;
     text-align: center;
     padding: 3rem 1rem;
@@ -44,7 +44,7 @@ section {
 }
 
 section h2 {
-    color: #667eea;
+    color: #0066cc;
     margin-bottom: 1rem;
 }
 
