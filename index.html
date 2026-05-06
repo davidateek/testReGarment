@@ -3,31 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Test Regarment</title>
+    <title>Clothes Recycle & Donation Directory</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Welcome to Test Regarment</h1>
-        <p>Your awesome website hosted on GitHub Pages</p>
+        <h1>♻️ Clothes Recycle & Donation Directory</h1>
+        <p>Find recycling centers and donation drop-offs near you</p>
     </header>
     
     <main>
-        <section>
-            <h2>Getting Started</h2>
-            <p>This is your homepage. Edit <code>index.html</code> to customize your content.</p>
-            <ul>
-                <li>Edit <code>index.html</code> for page content</li>
-                <li>Edit <code>styles.css</code> for styling</li>
-                <li>Add more HTML files in the root directory</li>
-            </ul>
+        <section class="controls">
+            <h2>Search & Filter</h2>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search by city, state, or ZIP code...">
+            </div>
+            <div class="filters">
+                <label>
+                    <input type="checkbox" id="filterRecycle" checked> Recycle Centers
+                </label>
+                <label>
+                    <input type="checkbox" id="filterDonate" checked> Donation Drop-offs
+                </label>
+                <button id="clearFilters">Clear Filters</button>
+            </div>
         </section>
+
+        <div class="container">
+            <section class="locations-list">
+                <h2>Locations</h2>
+                <div id="locationsList" class="list-container">
+                    <!-- Locations will be loaded here -->
+                </div>
+            </section>
+
+            <section class="map-section">
+                <h2>Map View</h2>
+                <div id="map" class="map-container"></div>
+            </section>
+        </div>
+
+        <div id="detailsModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="modalBody"></div>
+            </div>
+        </div>
     </main>
     
     <footer>
-        <p>&copy; 2026 Test Regarment. Built with ❤️</p>
+        <p>&copy; 2026 Test Regarment - Clothes Recycle & Donation Directory</p>
     </footer>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
